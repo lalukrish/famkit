@@ -3,13 +3,13 @@ dotenv.config();
 
 const express = require("express");
 const app = express();
+var cors = require("cors");
 const PORT = 7000;
 const mongoose = require("mongoose");
-
-app.get("/", (req, res) => {
-  res.send("hei");
-});
-
+require("./model/user");
+app.use(cors());
+app.use(express.json());
+app.use(require("./routes/auth"));
 mongoose.connect(process.env.MONGOURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
